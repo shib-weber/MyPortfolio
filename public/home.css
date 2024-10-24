@@ -1,10 +1,36 @@
+        body ,html{
+            cursor: url('http://localhost:7000/cursor1.png'), auto !important; 
+        }
         /* Dark theme styling */
         body {
+            display: flex;
+            flex-direction: column;
             margin: 0;
             padding: 0;
             background-color: #1e1e1e;
             color: #ffffff;
             font-family: Arial, sans-serif;
+            overflow-x: hidden;
+            overflow-y: auto;
+            height: 100vh;
+            cursor: url('cursor1.png'), auto !important; 
+        }
+        ::-webkit-scrollbar {
+            width: 12px; /* Width of the scrollbar */
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #2b2b2b; /* Background of the scrollbar track */
+            border-radius: 10px; /* Rounded corners for the track */
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background-color: #08f34e; /* Color of the scrollbar thumb */
+            border-radius: 10px; /* Rounded corners for the thumb */
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #06a837; /* Color of the thumb on hover */
         }
         /* Navbar styling */
         .navbar {
@@ -34,10 +60,13 @@
             align-items: center;
             text-align: center;
             color: #ffffff;
-            cursor: move;
+            cursor: grab;
             position: absolute;
             top: 400px;
             left: 50px;
+        }
+        .draggable-div:active {
+            cursor: grabbing; /* Change to grabbing hand when dragging */
         }
         #info{
             width: 500px;
@@ -93,7 +122,7 @@
             overflow: hidden;
             border: none;
         }
-        #textinfo1{
+        #textinfo1, #textinfo2, #textinfo3, #textinfo4 {
             position: absolute;
             top: 25%;
             outline: none;
@@ -114,5 +143,40 @@
             pointer-events: none; /* Prevents tooltip from interfering with mouse events */
             z-index: 10; /* Ensures tooltip appears above other elements */
             transition: opacity 0.3s ease;
+        }
+
+        .footer {
+            display: flex; 
+            flex-direction: column; /* Stack children vertically */
+            justify-content: center; /* Center content vertically */
+            align-items: center; /* Center content horizontally */
+            padding: 15px 20px; /* Padding around the footer */
+            background-color: #333; /* Dark background to match navbar */
+            color: white; /* Text color */
+            position: absolute;
+            
+            width: 100%; /* Full width */
+            top: 650px;
+        }
+        
+        .footer p {
+            margin: 0; /* Removes default margin */
+        }
+        
+        .footer-links {
+            display: flex; /* Flexbox for links */
+            gap: 15px; /* Space between links */
+            margin-top: 10px; /* Space above the links */
+        }
+        
+        .footer-links a {
+            color: white; /* Link color */
+            text-decoration: none; /* Removes underline */
+            transition: color 0.3s ease; /* Smooth color transition */
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline; /* Underline on hover */
+            color: #08f34e; /* Change link color on hover */
         }
         

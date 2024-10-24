@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname,'public')))
 app.set("view engine","ejs");
 app.set("views",path.resolve('./views'))
 
-app.use('/user',userRouter);
+app.use(userRouter);
 
 app.listen(PORT,()=>{
     console.log("Server is Running in PORT",PORT)

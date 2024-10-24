@@ -56,7 +56,11 @@ Unlock features by creating an account or logging in today!`;
         { id: 'bgColor1', message: 'Background Color' },
         { id: 'textColor1', message: 'Text Color' },
         { id: 'bgColor2', message: 'Background Color' },
-        { id: 'textColor2', message: 'Text Color' }
+        { id: 'textColor2', message: 'Text Color' },
+        { id: 'bgColor3', message: 'Background Color' },
+        { id: 'textColor3', message: 'Text Color' },
+        { id: 'bgColor4', message: 'Background Color' },
+        { id: 'textColor4', message: 'Text Color' }
     ];
 
     colorInputs.forEach(input => {
@@ -79,7 +83,7 @@ Unlock features by creating an account or logging in today!`;
     });
 
     document.getElementById('textColor1').addEventListener('input', function(event) {
-        document.getElementById('draggable1').style.color = event.target.value;
+        document.getElementById('textinfo1').style.color = event.target.value;
     });
 
     document.getElementById('bgColor2').addEventListener('input', function(event) {
@@ -87,6 +91,24 @@ Unlock features by creating an account or logging in today!`;
     });
 
     document.getElementById('textColor2').addEventListener('input', function(event) {
-        document.getElementById('draggable2').style.color = event.target.value;
+        document.getElementById('textinfo2').style.color = event.target.value;
+    });
+
+    document.getElementById('bgColor3').addEventListener('input', function(event) {
+        document.getElementById('draggable3').style.backgroundColor = event.target.value;
+    });
+
+    document.getElementById('textColor3').addEventListener('input', function(event) {
+        document.getElementById('textinfo3').style.color = event.target.value;
+    });
+
+    document.getElementById('bgColor4').addEventListener('input', function(event) {
+        document.getElementById('draggable4').style.backgroundColor = event.target.value;
+    });
+
+    document.getElementById('textColor4').addEventListener('input', function(event) {
+        document.getElementById('textinfo4').style.color = event.target.value;
     });
 });
+
+console.log(window.getComputedStyle(document.body).cursor);
