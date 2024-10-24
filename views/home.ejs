@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ApnaPortfolio</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <h2>ApnaPortfolio</h2>
+        <div>
+            <a href="/signin">Sign In</a>
+            <a href="/signup">Sign Up</a>
+        </div>
+    </div>
+
+    <!-- Draggable Divs -->
+    <div class="draggable-div" id="draggable1">
+        <div class="color-picker">
+            <input type="color" id="bgColor1" value="#444">
+            <input type="color" id="textColor1" value="#ffffff">
+        </div>
+        Drag Me
+    </div>
+
+
+    <div class="draggable-div" id="draggable2" style=" left: 250px;">
+        <div class="color-picker">
+            <input type="color" id="bgColor2" value="#444">
+            <input type="color" id="textColor2" value="#ffffff">
+        </div>
+        Drag Me Too
+    </div>
+
+
+    <!-- Interact.js Script for Draggable and Resizable Divs -->
+    <script src="https://cdn.jsdelivr.net/npm/interactjs@1.10.11/dist/interact.min.js"></script>
+
+<script src="home.js"></script>
+</body>
+</html>
