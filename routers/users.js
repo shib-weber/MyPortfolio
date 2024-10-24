@@ -22,4 +22,8 @@ router.get('/signup',(req,res)=>{
 router.get('/signin',(req,res)=>{
     res.render('login')
 })
+
+router.get('/user',(req,res)=>{
+    res.render('userpage')
+})
 module.exports=router

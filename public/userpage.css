@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, sans-serif;
+}
+header {
+    background: #333;
+    color: white;
+    padding: 1em;
+    text-align: center;
+}
+nav button {
+    margin: 0 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+#editor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    min-height: 80vh;
+    height: auto;
+    border: 1px solid #ddd;
+    margin: 20px auto;
+    overflow: auto;
+}
+.drag {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #333;
+    position: absolute;
+    top: -20px; /* Center the drag handle above the field */
+    right: -10px; /* Center the drag handle above the field */
+    cursor: move;
+}
+.draggable {
+    position: absolute;
+    padding: 10px;
+    cursor: default;
+}
+.text-field {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    font-size: 1.2em;
+    padding: 40px 10px 10px 30px; /* Space for the drag handle */
+}
+.image-field {
+    padding: 10px; /* Space for the drag handle */
+}
+.image-field img {
+    width: 100px;
+    height: 100px;
+}
