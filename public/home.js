@@ -111,4 +111,7 @@ Unlock features by creating an account or logging in today!`;
     });
 });
 
-console.log(window.getComputedStyle(document.body).cursor);
+window.history.pushState(null, '', window.location.href);
+window.onpopstate = function () {
+    window.history.pushState(null, '', window.location.href);
+};

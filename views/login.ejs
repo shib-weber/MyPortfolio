@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyPortfolio - Login</title>
+    <link rel="stylesheet" href="losi.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <h2>MyPortfolio</h2>
+        <div>
+            <a href="/">Home</a>
+            <a href="/signin">Sign In</a>
+            <a href="/signup">Sign Up</a>
+        </div>
+    </div>
+
+    <!-- Signup Form -->
+    <div class="signup-form">
+        <h3>Login</h3>
+        <form id="signupForm" action="/submit_signup" method="post" onsubmit="return validateForm()">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            
+            <label for="password">Password:</label>
+            <div class="password-container">
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                <span id="togglePassword" class="eye-icon">👁️</span>
+            </div>
+            
+            <button type="submit">Login</button>
+        </form>
+        <p id="error-message" style="color: #ff4d4d; display: none;">Please enter a valid email address.</p>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2024 ApnaPortfolio. All Rights Reserved.</p>
+        <div class="footer-links">
+            <a href="/about">About Us</a>
+            <a href="/contact">Contact</a>
+            <a href="/privacy">Privacy Policy</a>
+        </div>
+    </div>
+
+    <script>
+        // Toggle password visibility
+        const togglePassword = document.getElementById("togglePassword");
+        const passwordField = document.getElementById("password");
+
+        togglePassword.addEventListener("click", function () {
+            // Toggle password field type
+            const type = passwordField.getAttribute("type") === "password" ? "text" : "password";
+            passwordField.setAttribute("type", type);
+            // Toggle icon
+            this.textContent = type === "password" ? "👁️" : "🙈";
+        });
+
+        // Email validation
+        function validateForm() {
+            const email = document.getElementById('email').value;
+            const errorMessage = document.getElementById('error-message');
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (!emailPattern.test(email)) {
+                errorMessage.style.display = 'block';
+                return false;
+            } else {
+                errorMessage.style.display = 'none';
+                return true;
+            }
+        }
+            window.history.pushState(null, '', window.location.href);
+            window.onpopstate = function () {
+                window.history.pushState(null, '', window.location.href);
+        };
+
+    </script>
+
+</body>
+</html>
