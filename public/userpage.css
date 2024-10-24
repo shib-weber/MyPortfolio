@@ -3,6 +3,7 @@ body {
 }
 header {
     background: #333;
+    border-radius: 2rem;
     color: white;
     padding: 1em;
     text-align: center;
@@ -11,6 +12,14 @@ nav button {
     margin: 0 5px;
     padding: 10px;
     cursor: pointer;
+}
+#bgcolor{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50px;
+    right:20px;
 }
 #editor {
     display: flex;
@@ -24,7 +33,20 @@ nav button {
     margin: 20px auto;
     overflow: auto;
 }
-.drag {
+.draggable{
+    width: 150px;
+    height: 150px;
+    background-color: #444;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #ffffff;
+    position: relative;
+}
+.dragger {
     width: 20px;
     height: 20px;
     border-radius: 50%;
@@ -32,23 +54,36 @@ nav button {
     position: absolute;
     top: -20px; /* Center the drag handle above the field */
     right: -10px; /* Center the drag handle above the field */
-    cursor: move;
+    cursor: grab;
+    outline: auto;
 }
-.draggable {
+.transparent{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #a9cab3;
     position: absolute;
-    padding: 10px;
-    cursor: default;
+    top: -20px; /* Center the drag handle above the field */
+    right: 10px; /* Center the drag handle above the field */
+    cursor: pointer;
 }
-.text-field {
-    background-color: #f0f0f0;
-    border: 1px solid #ddd;
-    font-size: 1.2em;
-    padding: 40px 10px 10px 30px; /* Space for the drag handle */
+.backcolor{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #333333;
+    position: absolute;
+    top: -20px; /* Center the drag handle above the field */
+    right: 30px; /* Center the drag handle above the field */
+    cursor: pointer;
 }
-.image-field {
-    padding: 10px; /* Space for the drag handle */
-}
-.image-field img {
-    width: 100px;
-    height: 100px;
+.textcolor{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    position: absolute;
+    top: -20px; /* Center the drag handle above the field */
+    right: 50px; /* Center the drag handle above the field */
+    cursor: pointer;
 }
