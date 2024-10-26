@@ -21,7 +21,7 @@
     <!-- Signup Form -->
     <div class="signup-form">
         <h3>Sign Up</h3>
-        <form id="signupForm" action="/submit_signup" method="post" onsubmit="return validateForm()">
+        <form id="signupForm" action="#" onsubmit="return validateForm()">
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" placeholder="Enter your email" required>
             
@@ -76,6 +76,21 @@
         window.onpopstate = function () {
             window.history.pushState(null, '', window.location.href);
         };
+
+        document.querySelector('.signup-form').addEventListener('submit',async(e)=>{
+            e.preventDefault()
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const response = await fetch('/signup',{
+                method:"POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body:JSON.stringify({email, password})
+            })
+            document.getElementById('email').value=''
+            document.getElementById('password').value=''
+        })
 
     </script>
 
