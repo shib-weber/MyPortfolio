@@ -1,5 +1,6 @@
 let textCount = 0;
 const editor = document.querySelector('#editor');
+let cssRules
 
 document.querySelector('#addText').addEventListener('click', () => {
     textCount += 1;
@@ -40,6 +41,10 @@ document.querySelector('#addText').addEventListener('click', () => {
         draggableDiv.appendChild(textC);
         editor.appendChild(draggableDiv);
 
+        texta.addEventListener('input', () => {
+            texta.innerHTML = texta.value; 
+        });
+
         // Setting event listeners for color changes
         backColorInput.addEventListener('input', function(event) {
             draggableDiv.style.backgroundColor = event.target.value;
@@ -70,7 +75,18 @@ interact('.dragger').draggable({
             target.style.transform = `translate(${x}px, ${y}px)`;
             target.setAttribute('data-x', x);
             target.setAttribute('data-y', y);
-            console.log(document.body.innerHTML)
+        }
+    }
+});
+
+
+document.getElementById('bgcolor').addEventListener('input', function(event) {
+    editor.style.backgroundColor = event.target.value;
+    cssRules=event.target.value;
+});
+
+document.querySelector('#Savebtn').addEventListener('click',async(e)=>{
+    e.preventDefault();
             /*let cssRules = '';
 
             for (const sheet of document.styleSheets) {
@@ -81,14 +97,24 @@ interact('.dragger').draggable({
                 } catch (error) {
                     console.warn('Could not access stylesheet:', sheet.href, error);
                 }
-            }
+            }*/
             
-            console.log(cssRules);*/
-        }
-    }
-});
-
-
-document.getElementById('bgcolor').addEventListener('input', function(event) {
-    editor.style.backgroundColor = event.target.value;
-});
+            console.log(cssRules);
+            const Uhtml=editor.innerHTML;
+            console.log(editor.innerHTML)
+            
+            const response = await fetch(`/save/671d181137b9c531633f453b`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ html: Uhtml ,css: cssRules}),
+            });
+        
+            const result = await response.json();
+            if (result.success) {
+                console.log('Saved successfully!');
+            } else {
+                console.error('Failed to save:', result.message);
+            }
+})

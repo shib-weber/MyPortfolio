@@ -91,13 +91,13 @@
             })
 
             const result = await response.json();
-            if(result === 'Successful'){
+            if(result.message === 'Successful'){
                 document.getElementById('email').value=''
                 document.getElementById('password').value=''
-                window.location.href = '/user';
+                window.location.href = `/user/${result.id}`;
             }else{
                 const errorMessage = document.getElementById('error-message');
-                errorMessage.innerHTML=result;
+                errorMessage.innerHTML=result.message;
                 errorMessage.style.display = 'block';
             }
 

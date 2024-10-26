@@ -3,8 +3,8 @@ const mongoose = require ('mongoose');
 const UserSchema = mongoose.Schema({
     email:{type:String, required:true},
     password:{type:String,required:true},
-    html:{type:String},
-    css:{type:String},
+    html:{type:String,default:'No'},
+    css:{type:String,default:'No'},
     createdAt:{type:Date,default:Date.now}
 })
 

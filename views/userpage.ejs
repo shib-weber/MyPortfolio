@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyPortfolio</title>
-    <link rel="stylesheet" href="userpage.css">
+    <link rel="stylesheet" href="/userpage.css">
 </head>
 <body>
     <header>
@@ -16,11 +16,15 @@
         </nav>
     </header>
 
-    <main id="editor">
-        <!-- Dynamic fields will appear here -->
+    <main id="editor" style="background-color: <%= css === 'No' ? '#ffffff' : css %>;">
+        <% if (html === 'No') { %>
+            <!-- Dynamic fields will appear here -->
+        <% } else { %>
+            <%- html %> 
+        <% } %>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/interactjs@1.10.11/dist/interact.min.js"></script>
-    <script src="userpage.js"></script>
+    <script src="/userpage.js"></script>
 </body>
 </html>
