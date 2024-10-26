@@ -3,18 +3,38 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose')
 const User = require('../models/user')
 const mongodb= require('mongodb')
+const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
 const path= require('path')
 
 const router=express.Router();
 
 router.use(express.json());
 router.use(express.urlencoded({extended:true}));
+router.use(cookieParser());
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended:false}));
 
-router.get('/',(req,res)=>{
-    res.render('home')
-})
+function TokenVerify(req, res, next) {
+    const token = req.cookies.token;
+    if (!token) {
+        return res.json('No'); // No token, user not authenticated
+    }
+
+    const key = process.env.secret_key || 'Hello';
+    jwt.verify(token, key, (err, decoded) => {
+        if (err) {
+            return res.json('No'); // Invalid token
+        }
+        req.user = decoded; // Valid token
+        next(); // Proceed to the next middleware or route
+    });
+}
+
+// Route handler for home page
+router.get('/', (req, res) => {
+    res.render('home');
+});
 
 router.get('/signup',(req,res)=>{
     res.render('signup')
@@ -38,13 +58,25 @@ router.post('/signin', async(req,res)=>{
     const user = await User.findOne({email, password});
 
     if(user){
+        const key = process.env.secret_key || 'Hello';
+        const token = jwt.sign({ email: user.email, userid: user._id }, key, { expiresIn: '30d' });
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: false, 
+            maxAge: 24 * 60 * 60 * 1000,
+        });
         return res.json({message:'Successful',id:user._id})
     }else{
         res.json({message:'Incorrect Email or Password'})
     }
 })
 
-router.get('/user/:id',async(req,res)=>{
+router.post('/logout',(req,res)=>{
+    res.clearCookie('token');
+    res.json('loggedOut')
+})
+
+router.get('/user/:id',TokenVerify,async(req,res)=>{
     const _id = req.params.id
     
     const user = await User.findById({_id});
@@ -56,8 +88,8 @@ router.get('/user/:id',async(req,res)=>{
     
 })
 
-router.post('/save/:id', async (req, res) => {
-    const _id = req.params.id;  // Extracting the user ID from the URL
+router.post('/save',TokenVerify, async (req, res) => {
+    const _id = req.user.userid;  // Extracting the user ID from the URL
     const { html, css } = req.body;  // Extracting HTML and CSS from the request body
 
     try {

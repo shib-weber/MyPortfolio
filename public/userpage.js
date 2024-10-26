@@ -103,7 +103,7 @@ document.querySelector('#Savebtn').addEventListener('click',async(e)=>{
             const Uhtml=editor.innerHTML;
             console.log(editor.innerHTML)
             
-            const response = await fetch(`/save/671d181137b9c531633f453b`, {
+            const response = await fetch(`/save`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -117,4 +117,16 @@ document.querySelector('#Savebtn').addEventListener('click',async(e)=>{
             } else {
                 console.error('Failed to save:', result.message);
             }
+})
+
+document.querySelector('#logoutbtn').addEventListener('click',async()=>{
+    const response = await fetch('/logout',{
+        method:"POST",
+        credentials:"include"
+    })
+    const result = await response.json();
+
+    if(result ==='loggedOut'){
+        window.location.href='/'
+    }
 })
