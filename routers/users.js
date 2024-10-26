@@ -78,5 +78,17 @@ router.post('/save/:id', async (req, res) => {
     }
 });
 
+router.get('/Portfolio/:id',async(req,res)=>{
+    const _id = req.params.id
+    
+    const user = await User.findById({_id});
+    if(user.html==='No'){
+        res.render('show',{html:'No',css:'No'})
+    }else{
+        res.render('show',{html:user.html ,css:user.css})
+    }
+    
+})
+
 
 module.exports=router
