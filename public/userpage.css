@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     background: #111111;
-    height: 700vh;
+    height: 500vh;
 }
 ::-webkit-scrollbar {
     width: 12px; /* Width of the scrollbar */
@@ -33,11 +33,69 @@ header {
     text-align: center;
     z-index: 100;
 }
+
 nav button {
+    background: #444;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
     margin: 0 5px;
-    padding: 10px;
     cursor: pointer;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.3s ease, transform 0.2s ease;
 }
+
+/* Hover effects */
+nav button:hover {
+    color: #333;
+    background-color: #eee;
+    transform: translateY(-3px);
+}
+
+/* Ripple animation */
+nav button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(circle, #eee 10%, transparent 10%);
+    background-position: center;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease;
+}
+
+nav button:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+}
+
+/* Border effect */
+nav button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    background: linear-gradient(45deg, #f09, #301);
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    -webkit-mask-composite: destination-out;
+    transition: border-color 0.3s;
+}
+
+nav button:hover::after {
+    border-color: #f09;
+}
+
 #bgcolor{
     width: 40px;
     height: 40px;
@@ -53,7 +111,7 @@ nav button {
     top: 100px;
     position: absolute;
     width: 90%;
-    min-height: 650vh;
+    min-height: 450vh;
     border: 10px #333333;
     height: auto;
     border: 1px solid #ddd;
@@ -127,7 +185,7 @@ nav button {
     background-color: red;
     position: absolute;
     top: -20px; /* Center the drag handle above the field */
-    right: 90px; /* Center the drag handle above the field */
+    right: 130px; /* Center the drag handle above the field */
     cursor: pointer;
 }
 .textC{
@@ -137,8 +195,36 @@ nav button {
     background-color: white;
     color: black;
     position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     top: -20px; /* Center the drag handle above the field */
     right: 70px; /* Center the drag handle above the field */
+    cursor: pointer;
+    border: 1px solid black;
+}
+.textD{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: white;
+    color: black;
+    position: absolute;
+    top: -20px; /* Center the drag handle above the field */
+    right: 90px; /* Center the drag handle above the field */
+    cursor: pointer;
+    border: 1px solid black;
+}
+.textAlign{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: white;
+    color: black;
+    position: absolute;
+    top: -20px; /* Center the drag handle above the field */
+    right: 110px; /* Center the drag handle above the field */
     cursor: pointer;
     border: 1px solid black;
 }
