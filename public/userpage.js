@@ -10,24 +10,34 @@ document.querySelector('#addText').addEventListener('click', () => {
         const textColorInput = document.createElement('input');
         textColorInput.type = 'color';
 
-        
         const draggableDiv = document.createElement('div');
+        const texta= document.createElement('textarea')
         const draggerDiv = document.createElement('div');
         const transparentBtn = document.createElement('button');
-        
+        const remove =document.createElement('div');
+        const textC =document.createElement('div');
+        draggableDiv.style.top = `${document.documentElement.scrollTop + 40}px`;
+
         // Setting class names and properties
         backColorInput.className = 'backcolor';
         textColorInput.className = 'textcolor';
         transparentBtn.className = 'transparent';
+        remove.className='removebtn'
+        textC.className='textC'
+        texta.id='texta';
         draggerDiv.className = 'dragger';
         draggableDiv.className = 'draggable';
-        draggableDiv.innerHTML = `text ${textCount}`;
+        texta.innerHTML = `Text ${textCount}`;
+        textC.innerHTML='A'
         
         // Appending elements
         draggableDiv.appendChild(draggerDiv);
         draggableDiv.appendChild(transparentBtn);
         draggableDiv.appendChild(backColorInput);
         draggableDiv.appendChild(textColorInput);
+        draggableDiv.appendChild(texta);
+        draggableDiv.appendChild(remove);
+        draggableDiv.appendChild(textC);
         editor.appendChild(draggableDiv);
 
         // Setting event listeners for color changes
@@ -36,13 +46,17 @@ document.querySelector('#addText').addEventListener('click', () => {
         });
 
         textColorInput.addEventListener('input', function(event) {
-            draggableDiv.style.color = event.target.value;
+            texta.style.color = event.target.value;
         });
 
         // Setting transparent background on click
         transparentBtn.addEventListener('click', function() {
             draggableDiv.style.backgroundColor = 'transparent';
         });
+
+        remove.addEventListener('click',()=>{
+            editor.removeChild(draggableDiv);
+        })
     }
 });
 
@@ -56,6 +70,20 @@ interact('.dragger').draggable({
             target.style.transform = `translate(${x}px, ${y}px)`;
             target.setAttribute('data-x', x);
             target.setAttribute('data-y', y);
+            console.log(document.body.innerHTML)
+            /*let cssRules = '';
+
+            for (const sheet of document.styleSheets) {
+                try {
+                    for (const rule of sheet.cssRules) {
+                        cssRules += rule.cssText + '\n';
+                    }
+                } catch (error) {
+                    console.warn('Could not access stylesheet:', sheet.href, error);
+                }
+            }
+            
+            console.log(cssRules);*/
         }
     }
 });

@@ -1,12 +1,37 @@
 body {
     font-family: Arial, sans-serif;
+    background: #111111;
+    height: 700vh;
+}
+::-webkit-scrollbar {
+    width: 12px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background: #2b2b2b; /* Background of the scrollbar track */
+    border-radius: 10px; /* Rounded corners for the track */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #08f34e; /* Color of the scrollbar thumb */
+    border-radius: 10px; /* Rounded corners for the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #06a837; /* Color of the thumb on hover */
 }
 header {
+    border: 1px solid #ddd;
+    top: 2%;
+    width: 90%;
+    left: 4%;
+    position: fixed;
     background: #333;
     border-radius: 2rem;
     color: white;
     padding: 1em;
     text-align: center;
+    z-index: 100;
 }
 nav button {
     margin: 0 5px;
@@ -18,24 +43,31 @@ nav button {
     height: 40px;
     border-radius: 50%;
     position: absolute;
-    top: 50px;
+    top: 18px;
     right:20px;
 }
 #editor {
+    background-color: rgb(255, 247, 247);
     display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    width: 100%;
-    min-height: 80vh;
+    left: 5%;
+    top: 100px;
+    position: absolute;
+    width: 90%;
+    min-height: 650vh;
+    border: 10px #333333;
     height: auto;
     border: 1px solid #ddd;
     margin: 20px auto;
     overflow: auto;
+    padding-bottom: 20px;
 }
 .draggable{
-    width: 150px;
-    height: 150px;
+    left: 40%;
+    padding: 1%;
+    min-width:150px;
+    min-height: 50px;
+    width: auto;
+    height: auto;
     background-color: #444;
     border-radius: 10px;
     display: flex;
@@ -44,7 +76,8 @@ nav button {
     align-items: center;
     text-align: center;
     color: #ffffff;
-    position: relative;
+    cursor:pointer;
+    position: inherit;
 }
 .dragger {
     width: 20px;
@@ -86,4 +119,35 @@ nav button {
     top: -20px; /* Center the drag handle above the field */
     right: 50px; /* Center the drag handle above the field */
     cursor: pointer;
+}
+.removebtn{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: red;
+    position: absolute;
+    top: -20px; /* Center the drag handle above the field */
+    right: 90px; /* Center the drag handle above the field */
+    cursor: pointer;
+}
+.textC{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: white;
+    color: black;
+    position: absolute;
+    top: -20px; /* Center the drag handle above the field */
+    right: 70px; /* Center the drag handle above the field */
+    cursor: pointer;
+    border: 1px solid black;
+}
+#texta{
+    width: 90%;
+    min-height: 90%;
+    height: auto;
+    background-color: transparent;
+    overflow: hidden;
+    outline: none;
+    border: none;
 }
