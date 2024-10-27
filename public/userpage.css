@@ -237,3 +237,14 @@ nav button:hover::after {
     outline: none;
     border: none;
 }
+.tooltip {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #ffffff;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 12px;
+    pointer-events: none; /* Prevents tooltip from interfering with mouse events */
+    z-index: 10; /* Ensures tooltip appears above other elements */
+    transition: opacity 0.3s ease;
+}

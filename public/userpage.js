@@ -35,6 +35,8 @@ document.querySelector('#addText').addEventListener('click', () => {
         texta.innerHTML = `Text Here`;
         textC.innerHTML = '+';
         textD.innerHTML = '-';
+        texta.style.textAlign = 'left';
+        textAlign.innerHTML = '→';
 
         // Appending elements
         draggableDiv.appendChild(draggerDiv);
@@ -50,7 +52,33 @@ document.querySelector('#addText').addEventListener('click', () => {
 
         // Apply draggable and event listeners to the new element
         applyDraggable(draggerDiv, draggableDiv);
-        applyEventListeners(draggableDiv, texta, backColorInput, textColorInput, transparentBtn, remove, textC, textD);
+        applyEventListeners(draggableDiv, texta, backColorInput, textColorInput, transparentBtn, remove, textC, textD, textAlign);
+        const tooltip = document.getElementById('tooltip');
+
+        function showTooltip(event, message) {
+            tooltip.innerText = message;
+            tooltip.style.display = 'block';
+            tooltip.style.left = `${event.pageX + 10}px`;
+            tooltip.style.top = `${event.pageY + 10}px`;
+        }
+    
+        function hideTooltip() {
+            tooltip.style.display = 'none';
+        }
+        const colorInputs = [
+            { element: backColorInput, message: 'Background Color' },
+            { element: textColorInput, message: 'Text Color' },
+            { element: transparentBtn, message: 'Makes Transparent' },
+            { element: remove, message: 'Permanently Removes' },
+            {element:textC , message:'Increase Font Size'},
+            {element:textD , message:'Decrease Font Size'},
+            {element:textAlign , message:'Aligns Text'},
+        ];
+    
+        colorInputs.forEach(({ element, message }) => {
+            element.addEventListener('mouseenter', (event) => showTooltip(event, message));
+            element.addEventListener('mouseleave', hideTooltip);
+        });
     }
 });
 
@@ -70,7 +98,7 @@ function applyDraggable(dragger, draggableDiv) {
 }
 
 // Function to apply event listeners
-function applyEventListeners(draggableDiv, texta, backColorInput, textColorInput, transparentBtn, remove, textC, textD) {
+function applyEventListeners(draggableDiv, texta, backColorInput, textColorInput, transparentBtn, remove, textC, textD, textAlign) {
     texta.addEventListener('input', () => {
         texta.innerHTML = texta.value;
     });
@@ -89,6 +117,7 @@ function applyEventListeners(draggableDiv, texta, backColorInput, textColorInput
 
     remove.addEventListener('click', () => {
         editor.removeChild(draggableDiv);
+        tooltip.style.display = 'none';
     });
 
     // Increase font size
@@ -116,6 +145,20 @@ function applyEventListeners(draggableDiv, texta, backColorInput, textColorInput
             console.error('Failed to retrieve font size for texta');
         }
     });
+
+    textAlign.addEventListener('click', () => {
+        if (texta.style.textAlign === 'left') {
+            texta.style.textAlign = 'center';
+            textAlign.innerHTML = '→'; // Change symbol to indicate right alignment
+        } else if (texta.style.textAlign === 'center') {
+            texta.style.textAlign = 'right';
+            textAlign.innerHTML = '←'; // Change symbol to indicate left alignment
+        } else {
+            texta.style.textAlign = 'left';
+            textAlign.innerHTML = '→'; // Reset symbol to indicate center alignment
+        }
+    });
+
 }
 
 // Apply draggable and event listeners to existing draggable elements on page load
@@ -128,9 +171,36 @@ document.querySelectorAll('.draggable').forEach(draggableDiv => {
     const remove = draggableDiv.querySelector('.removebtn');
     const textC = draggableDiv.querySelector('.textC');
     const textD = draggableDiv.querySelector('.textD');
+    const textAlign = draggableDiv.querySelector('.textAlign');
 
     applyDraggable(draggerDiv, draggableDiv);
-    applyEventListeners(draggableDiv, texta, backColorInput, textColorInput, transparentBtn, remove, textC, textD);
+    applyEventListeners(draggableDiv, texta, backColorInput, textColorInput, transparentBtn, remove, textC, textD, textAlign);
+    const tooltip = document.getElementById('tooltip');
+
+    function showTooltip(event, message) {
+        tooltip.innerText = message;
+        tooltip.style.display = 'block';
+        tooltip.style.left = `${event.pageX + 10}px`;
+        tooltip.style.top = `${event.pageY + 10}px`;
+    }
+
+    function hideTooltip() {
+        tooltip.style.display = 'none';
+    }
+    const colorInputs = [
+        { element: backColorInput, message: 'Background Color' },
+        { element: textColorInput, message: 'Text Color' },
+        { element: transparentBtn, message: 'Makes Transparent' },
+        { element: remove, message: 'Permanently Removes' },
+        {element:textC , message:'Increase Font Size'},
+        {element:textD , message:'Decrease Font Size'},
+        {element:textAlign , message:'Aligns Text'},
+    ];
+
+    colorInputs.forEach(({ element, message }) => {
+        element.addEventListener('mouseenter', (event) => showTooltip(event, message));
+        element.addEventListener('mouseleave', hideTooltip);
+    });
 });
 
 document.getElementById('bgcolor').addEventListener('input', function(event) {
