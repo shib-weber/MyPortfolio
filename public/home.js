@@ -115,3 +115,98 @@ window.history.pushState(null, '', window.location.href);
 window.onpopstate = function () {
     window.history.pushState(null, '', window.location.href);
 };
+
+const start = document.querySelector('#startgbtn');
+const label = document.querySelector('#startbtn');
+const cat = document.getElementById("cat");
+const obstacle = document.getElementById("obstacle");
+let isJumping = false;
+let initial = 0; // Score initialization
+let speed = 2000; // Initial speed of the obstacle (in ms)
+
+start.addEventListener('click', () => {
+    startGame();
+});
+
+function startGame() {
+    initial = 0;
+    label.innerHTML = `Score: ${initial}`;
+    start.style.display = 'none';
+    obstacle.style.animationPlayState = 'running';
+    obstacle.style.animationDuration = `${speed}ms`; // Set initial speed
+
+    // Start listening for both touch and keyboard commands for jumping
+    document.addEventListener('keydown', handleJump);
+    document.addEventListener('touchstart', handleJump); // For mobile touch support
+}
+
+function handleJump(event) {
+    // Check for space key or touch event
+    if ((event.code === 'Space' || event.type === 'touchstart') && !isJumping) {
+        jump();
+    }
+}
+
+function jump() {
+    isJumping = true;
+    cat.style.transform = 'translateY(-90px)';
+    obstacle.style.transform = `translateX(-100px)`;
+    setTimeout(() => {
+        cat.style.transform = 'translateY(0)';
+        isJumping = false;
+        initial += 1;
+        label.innerHTML = `Score: ${initial}`;
+
+        // Increase speed every 10 points
+        if (initial % 10 === 0 && initial > 0) {
+            speed *= 0.9; // Increase speed by reducing the duration
+            obstacle.style.animationDuration = `${speed}ms`; // Update animation duration
+        }
+    }, 700);
+}
+
+function checkCollision() {
+    const catRect = cat.getBoundingClientRect();
+    const obstacleRect = obstacle.getBoundingClientRect();
+    
+    const rightTolerance = 20; // Allow cat to overlap a bit more on the right side
+    if(!initial==0){
+    // Detect overlap between cat and obstacle with adjusted right-side tolerance
+    if (
+        (catRect.right - rightTolerance) > obstacleRect.left &&  // Tolerance on right side of cat
+        (catRect.left + rightTolerance) < (obstacleRect.right - 5) && // Adjusted right side of obstacle
+        catRect.bottom > obstacleRect.top &&
+        catRect.top < obstacleRect.bottom
+    ) {
+        label.innerHTML = `Game Over ! <br>Score : ${initial}`;
+        resetGame();
+    }
+    }
+}
+
+function resetGame() {
+    obstacle.style.animationPlayState = 'paused';
+    cat.style.transform = 'translateY(0)';
+    isJumping = false;
+    document.removeEventListener('keydown', handleJump);
+    document.removeEventListener('touchstart', handleJump); // Remove mobile touch listener as well
+    start.style.display = 'block';
+    start.style.outline=`none`
+    start.innerHTML=`<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="30"
+    height="30"
+    viewBox="0 0 40 40"
+>
+    <!-- Arrow -->
+    <path
+        d="M12 4V1l-4 4 4 4V6a6 6 0 1 1-6 6h2a4 4 0 1 0 4-4H12z"
+        fill="#333"
+    />
+</svg>`
+    obstacle.style.animationDuration = '2000ms'; // Reset speed back to initial speed
+    speed = 2000; // Reset speed variable for next game
+}
+
+// Check for collisions every 50ms
+setInterval(checkCollision, 50);

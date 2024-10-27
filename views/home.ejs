@@ -13,8 +13,60 @@
         <h2>MyPortfolio</h2>
         <div>
             <a href="/">Home</a>
-            <a href="/signin">Sign In</a>
+            <a href="/signin">Login</a>
             <a href="/signup">Sign Up</a>
+        </div>
+    </div>
+    <div class="smallscreen" style="display: none;">
+        <p>Oops! Not Supported For Your device Width</p>
+        <div class="emoji">
+            <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="100"
+            height="100"
+            viewBox="0 0 24 24"
+        >
+            <!-- Face Circle -->
+            <rect width="24" height="24" fill="#333" rx="5" />
+            
+            <!-- Eyes -->
+            <rect x="8" y="10" width="2" height="2" fill="white" />
+            <rect x="14" y="10" width="2" height="2" fill="white" />
+            
+            <!-- Sad Mouth -->
+            <path d="M8 15 C10 13, 14 13, 16 15" stroke="white" stroke-width="2" fill="none" />
+        </svg>
+        
+            
+            
+        </div>
+        <div class="game">
+            <svg id="cat" width="100" height="100" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <!-- Body -->
+                <rect x="6" y="10" width="10" height="6" fill="#333" />
+                <!-- Head -->
+                <rect x="13" y="7" width="5" height="5" fill="#333" />
+                <!-- Ear -->
+                <polygon points="15,7 16,5 17,7" fill="#333" />
+                <!-- Eye -->
+                <rect x="16" y="8" width="1" height="1" fill="#FFF" />
+                <!-- Nose -->
+                <rect x="17" y="9" width="1" height="1" fill="#FFF" />
+                <!-- Tail -->
+                <path d="M6 12 Q3 11, 4 8" stroke="#333" stroke-width="1.5" fill="none" />
+                <!-- Legs -->
+                <rect x="8" y="16" width="1" height="3" fill="#333" />
+                <rect x="11" y="16" width="1" height="3" fill="#333" />
+                <rect x="14" y="16" width="1" height="3" fill="#333" />
+            </svg>
+            
+            <div class="obstacle" id="obstacle"></div>
+            <div class="ground"></div>
+            
+            <div class="fbt">
+                <label id="startbtn">Start</label>
+                <button id="startgbtn"></button>
+            </div>
         </div>
     </div>
 
