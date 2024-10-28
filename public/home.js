@@ -160,10 +160,15 @@ function jump() {
         // Increase speed every 10 points
         if (initial % 10 === 0 && initial > 0) {
             speed *= 0.9; // Increase speed by reducing the duration
-            obstacle.style.animationDuration = `${speed}ms`; // Update animation duration
+
+            // Reset the animation with the new speed
+            obstacle.style.animation = 'none';  // Stop the animation
+            obstacle.offsetHeight;  // Trigger reflow to restart the animation
+            obstacle.style.animation = `moveObstacle ${speed}ms linear infinite`; // Apply the new speed
         }
     }, 700);
 }
+
 
 function checkCollision() {
     const catRect = cat.getBoundingClientRect();
