@@ -8,7 +8,7 @@ require('dotenv').config();
 
 const app = express();
 const PORT = 7000;
-const MongoUrl='mongodb://127.0.0.1:27017/Portfolio'|| process.env.MONGODB_URI;
+const MongoUrl= process.env.MONGODB_URI;
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
