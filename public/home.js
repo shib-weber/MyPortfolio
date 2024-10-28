@@ -210,3 +210,16 @@ function resetGame() {
 
 // Check for collisions every 50ms
 setInterval(checkCollision, 50);
+
+let index2=0
+const error=document.querySelector('#error');
+const message=`OOops! Not Supported For Your device Width`
+function typeWriter2() {
+    if (index2 < message.length) {
+        error.innerHTML += message.charAt(index2);
+        index2++;
+        setTimeout(typeWriter2, 50); // Adjust speed by changing the delay (in milliseconds)
+    }
+}
+typeWriter2();
+error.innerHTML=''
