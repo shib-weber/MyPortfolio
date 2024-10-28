@@ -4,10 +4,11 @@ const userRouter= require('./routers/users')
 const mongoose = require('mongoose')
 const mongodb= require('mongodb')
 const path= require('path')
+require('dotenv').config();
 
 const app = express();
 const PORT = 7000;
-const MongoUrl='mongodb://127.0.0.1:27017/Portfolio'
+const MongoUrl='mongodb://127.0.0.1:27017/Portfolio'|| process.env.MONGODB_URI;
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
