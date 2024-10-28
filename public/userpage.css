@@ -248,19 +248,31 @@ nav button:hover::after {
     z-index: 10; /* Ensures tooltip appears above other elements */
     transition: opacity 0.3s ease;
 }
-.for_share {
+.container {
     position: absolute;
     top: 130px;
     left: 9%;
+    width: 80%;
+    font-family: Arial, sans-serif;
+}
+
+.container label {
+    color: white;
+    font-size: 14px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.for_share {
     background-color: #333;
     color: white;
     padding: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-family: Arial, sans-serif;
-    width: 80%;
+    width: 100%;
 }
+
 .copy-text {
     margin-right: 10px;
     cursor: pointer;

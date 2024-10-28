@@ -17,9 +17,12 @@
         </nav>
     </header>
     <div class="tooltip" id="tooltip" style="display: none;"></div>
-    <div class="for_share">
-        <span class="copy-text" id="textToCopy"></span>
-        <button class="copy-button" >Copy</button>
+    <div class="container">
+        <label>Your Portfolio is Live at this URL. Copy it and Share</label>
+        <div class="for_share">
+        <span class="copy-text" id="textToCopy">https://example.com/your-portfolio</span>
+        <button class="copy-button" onclick="copyText()">Copy</button>
+        </div>
     </div>
 
     <main id="editor" style="background-color: <%= css === 'No' ? '#ffffff' : css %>;">
