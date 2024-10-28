@@ -250,7 +250,7 @@ nav button:hover::after {
 }
 .container {
     position: absolute;
-    top: 130px;
+    top: 100px;
     left: 9%;
     width: 80%;
     font-family: Arial, sans-serif;
