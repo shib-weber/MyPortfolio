@@ -108,7 +108,7 @@ nav button:hover::after {
     background-color: rgb(255, 247, 247);
     display: flex;
     left: 5%;
-    top: 100px;
+    top: 200px;
     position: absolute;
     width: 90%;
     min-height: 450vh;
@@ -247,4 +247,29 @@ nav button:hover::after {
     pointer-events: none; /* Prevents tooltip from interfering with mouse events */
     z-index: 10; /* Ensures tooltip appears above other elements */
     transition: opacity 0.3s ease;
+}
+.for_share {
+    position: absolute;
+    top: 130px;
+    left: 9%;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: Arial, sans-serif;
+    width: 80%;
+}
+.copy-text {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.copy-button {
+    background-color: #555;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
 }

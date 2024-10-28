@@ -239,3 +239,26 @@ document.querySelector('#logoutbtn').addEventListener('click', async () => {
         window.location.href = '/';
     }
 });
+const url=window.location.href
+const id = url.substring(url.lastIndexOf('/') + 1);
+document.querySelector('.copy-text').innerHTML=`https://myportfolio-98i0.onrender.com/Portfolio/${id}`
+
+document.querySelector('.copy-button').addEventListener('click',()=>{
+    copyText();
+})
+function copyText() {
+    const textToCopy = document.getElementById("textToCopy").innerText;
+    const copyButton = document.querySelector('.copy-button');
+
+    navigator.clipboard.writeText(textToCopy).then(() => {
+      // Change the button text to a tick mark
+    copyButton.innerHTML = '✔️';
+    
+      // Revert back to "Copy" after 2 seconds
+    setTimeout(() => {
+        copyButton.innerHTML = 'Copy';
+    }, 4000);
+    }).catch((err) => {
+    console.error("Could not copy text: ", err);
+    });
+}
