@@ -5,6 +5,7 @@ const UserSchema = mongoose.Schema({
     password:{type:String,required:true},
     html:{type:String,default:'No'},
     css:{type:String,default:'No'},
+    photo :[{type:String,}],
     createdAt:{type:Date,default:Date.now}
 })
 

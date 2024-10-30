@@ -119,6 +119,24 @@ nav button:hover::after {
     overflow: auto;
     padding-bottom: 20px;
 }
+.draggableresizable {
+    min-width: 100px;
+    min-height: 100px;
+    resize: both;
+    overflow: auto;
+}
+.delImg {
+    background-color: red; /* Background color */
+    color: white; /* Text color */
+    border-radius: 50%; /* Make it circular */
+    width: 20px; /* Size */
+    height: 20px; /* Size */
+    display: flex; /* Center content */
+    align-items: center; /* Center content */
+    justify-content: center; /* Center content */
+    cursor: pointer; /* Pointer cursor */
+    z-index: 10; /* Make sure it appears above other elements */
+}
 .draggable{
     left: 40%;
     padding: 1%;

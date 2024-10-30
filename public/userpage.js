@@ -208,16 +208,113 @@ document.getElementById('bgcolor').addEventListener('input', function(event) {
     cssRules = event.target.value;
 });
 
+// Handle image upload button click
+const imageUpload = document.querySelector('#imageUpload');
+
+// Trigger file selection on button click
+document.querySelector('#addImage').addEventListener('click', (event) => {
+    event.preventDefault();
+    imageUpload.click();
+});
+
+// Handle file selection and add the image to the editor
+imageUpload.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    
+    if (file) {
+        const reader = new FileReader();
+        
+        reader.onload = () => {
+            // Create a container for the image
+            const imgContainer = document.createElement('div');
+            imgContainer.style.position = 'absolute';
+            imgContainer.style.top = `${document.documentElement.scrollTop + 40}px`;
+
+            const img = document.createElement('img');
+            img.src = reader.result; // Set uploaded image as the source
+            img.className = 'draggableresizable';
+            img.style.width = '100px'; // Default size
+            img.style.height = '100px';
+
+            // Create the delete button
+            const del = document.createElement('div');
+            del.className = 'delImg';
+            del.innerText = 'X'; // You can style this or use an icon
+            del.style.cursor = 'pointer';
+            del.style.position = 'absolute';
+            del.style.top = '0'; // Position it relative to the image
+            del.style.right = '0'; // Position it relative to the image
+
+            // Add event listener to the delete button
+            del.addEventListener('click', () => {
+                editor.removeChild(imgContainer); // Remove the entire container
+            });
+
+            // Append the image to the container
+            imgContainer.appendChild(img);
+            // Append the delete button to the container
+            imgContainer.appendChild(del);
+            
+            // Append the container to the editor
+            editor.appendChild(imgContainer);
+            
+            // Apply draggable and resizable functionality
+            setTimeout(() => applyDraggable2(imgContainer), 100); // Use imgContainer for dragging
+            applyResizable(img); // Apply resizing directly to the image
+        };
+        
+        reader.readAsDataURL(file); // Read file as a data URL
+    }
+});
+
+// Function to apply draggable behavior
+function applyDraggable2(element) {
+    if (!element) {
+        console.error("Draggable element is not available.");
+        return;
+    }
+    interact(element).draggable({
+        listeners: {
+            move(event) {
+                const x = (parseFloat(element.getAttribute('data-x')) || 0) + event.dx;
+                const y = (parseFloat(element.getAttribute('data-y')) || 0) + event.dy;
+                element.style.transform = `translate(${x}px, ${y}px)`;
+                element.setAttribute('data-x', x);
+                element.setAttribute('data-y', y);
+            }
+        }
+    });
+}
+
+// Function to apply resizable behavior
+function applyResizable(element) {
+    interact(element).resizable({
+        edges: { left: true, right: true, bottom: true, top: true }
+    }).on('resizemove', (event) => {
+        let { width, height } = event.rect;
+        element.style.width = `${width}px`;
+        element.style.height = `${height}px`;
+    });
+}
+
+// Apply draggable and resizable to existing images (if any)
+document.querySelectorAll('.draggableresizable').forEach(dragr => {
+    applyDraggable2(dragr);
+    applyResizable(dragr);
+});
+
 document.querySelector('#Savebtn').addEventListener('click', async (e) => {
     e.preventDefault();
 
     const Uhtml = editor.innerHTML;
+    const images = Array.from(editor.querySelectorAll('img')).map(img => img.src);
+
     const response = await fetch(`/save`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ html: Uhtml, css: cssRules }),
+        body: JSON.stringify({ html: Uhtml, css: cssRules, photo: images }),
     });
 
     const result = await response.json();

@@ -19,6 +19,6 @@ body{
 textarea {
     resize: none; /* Prevents the textarea from being resized */
 }
-.dragger , .transparent, .backcolor, .textcolor, .removebtn, .textC, .textD, .textAlign {
+.dragger , .transparent, .backcolor, .textcolor, .removebtn, .textC, .textD, .textAlign, .delImg {
     display: none;
 }
