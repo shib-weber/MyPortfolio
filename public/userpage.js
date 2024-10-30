@@ -266,8 +266,6 @@ imageUpload.addEventListener('change', (event) => {
         reader.readAsDataURL(file); // Read file as a data URL
     }
 });
-
-// Function to apply draggable behavior
 function applyDraggable2(element) {
     if (!element) {
         console.error("Draggable element is not available.");
